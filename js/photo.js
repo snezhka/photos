@@ -8,7 +8,7 @@ export class Photo {
     constructor() {
         let id = ++Photo.pid;
         this.id = id;
-        this.url = `photos/${id}`;
+        this.url = `photos/${id}.jpg`;
         this.description = 'Описание';
         this.likes = generateInteger(likes.min, likes.max);
         this.comments = new Array(generateInteger(comments.min, comments.max)).fill(null).map(() => new Comment());
