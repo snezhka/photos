@@ -12,7 +12,6 @@ export function generateBigPicture(evt) {
     const smallPicture = evt.currentTarget;
     const comments = smallPicture.querySelector('.comment_objects');
     bigPicture.classList.remove('hidden');
-    // comments.classList.remove('hidden');
     console.log(evt.currentTarget);
     bigPictureImg.src = evt.target.src;
     likesCount.textContent = smallPicture.querySelector('.picture__likes').textContent;
