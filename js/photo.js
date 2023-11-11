@@ -22,6 +22,6 @@ class Comment {
         this.id = ++Comment.cid;
         this.avatar = `img/avatar-${generateInteger(avatars.min, avatars.max)}.svg`;
         this.message = messages[generateInteger(0, messages.length - 1)];
-        this.name = `${names[generateInteger(0, names.length - 1)]}, ${surNames[generateInteger(0, surNames.length - 1)]}`;
+        this.name = `${names[generateInteger(0, names.length - 1)]} ${surNames[generateInteger(0, surNames.length - 1)]}`;
     }
 }
