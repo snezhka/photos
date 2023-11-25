@@ -1,8 +1,10 @@
 const pictures = document.querySelector('.pictures');
+const picturesTitle = document.querySelector('.pictures__title');
 
 export function generatePictures(photos) {
     const pics = photos.map(photo => generatePicture(photo));
     pictures.append(...pics);
+    picturesTitle.classList.remove('visually-hidden');
 }
 
 function generatePicture(photo) {
