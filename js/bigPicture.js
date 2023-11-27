@@ -24,13 +24,15 @@ export function generateBigPicture(evt) {
     }
 }
 
-close.addEventListener('click', () => {
+function closeBigPicture() {
     bigPicture.classList.add('hidden');
     body.classList.remove('.modal-open');
+}
+close.addEventListener('click', () => {
+    closeBigPicture();
 })
 document.addEventListener('keydown', evt => {
     if (evt.key === 'Escape') {
-        bigPicture.classList.add('hidden');
-        body.classList.remove('.modal-open');
+        closeBigPicture();
     }
 });
