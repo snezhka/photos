@@ -22,3 +22,8 @@ export const messages = ['Все відмінно!', 'Загалом все не
 export const names = ['Иван', 'Федор', 'Илья', 'Виктор', 'Петр', 'Максим', 'Денис', 'Дмитрий', 'Валерий', 'Алексей'];
 
 export const surNames = ['Иванов', 'Петров', 'Лысенко', 'Шевченко', 'Кузнецов', 'Смирнов', 'Попов', 'Васильев', 'Соколов', 'Михайлов'];
+
+export const hashTagsMax = 5;
+export const hashTagMinLength = 2;
+export const hashTagMaxLength = 20;
+export const commentMaxLength = 140;
