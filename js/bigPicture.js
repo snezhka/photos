@@ -9,6 +9,11 @@ const close = document.querySelector('#picture-cancel');
 const commentsLoader = document.querySelector('.social__comments-loader');
 const commentsShown = document.querySelector('.comments-shown');
 const commentsCount = document.querySelector('.comments-count');
+const scaleControlSmaller = document.querySelector('.scale__control--smaller');
+const scaleControlBigger = document.querySelector('.scale__control--bigger');
+const scaleControlValue = document.querySelector('.scale__control--value');
+const imgUploadPreview = document.querySelector('.img-upload__preview');
+
 let commentsArr = [];
 let commentsNum = 0;
 
@@ -27,7 +32,6 @@ export function generateBigPicture(evt) {
         commentsLoader.classList.remove('hidden');
         generateComments(commentsNum);
         body.classList.add('.modal-open');
-        // commentsLoader.classList.toggle('hidden');
     }
 }
 
@@ -60,3 +64,25 @@ document.addEventListener('keydown', evt => {
     }
 });
 commentsLoader.addEventListener('click', () => generateComments(commentsNum));
+scaleControlSmaller.addEventListener('click', () => {
+    const currentValue = +scaleControlValue.value.slice(0, -1);
+    const newValue = (currentValue - 25) < 25 ? 25 : currentValue - 25;
+    scaleControlValue.value = `${newValue} %`;
+    imgUploadPreview.setAttribute('style', `scale:${(newValue / 100)}`);
+})
+scaleControlBigger.addEventListener('click', () => {
+    const currentValue = +scaleControlValue.value.slice(0, -1);
+    const newValue = (currentValue + 25) > 100 ? 100 : currentValue + 25;
+    scaleControlValue.value = `${newValue} %`;
+    imgUploadPreview.setAttribute('style', `scale:${(newValue / 100)}`);
+})
+var slider = document.getElementById('slider');
+
+noUiSlider.create(slider, {
+    start: [20, 80],
+    connect: true,
+    range: {
+        'min': 0,
+        'max': 100
+    }
+});
