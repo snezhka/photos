@@ -27,3 +27,39 @@ export const hashTagsMax = 5;
 export const hashTagMinLength = 2;
 export const hashTagMaxLength = 20;
 export const commentMaxLength = 140;
+export const resizeStep = 25;
+export const resizeMax = 100;
+export const modLength = 2;
+
+export const effectsRanges = {
+    'chrome': {
+        min: 0,
+        max: 1,
+        step: 0.1,
+        effect: 'grayscale'
+    },
+    'sepia': {
+        min: 0,
+        max: 1,
+        step: 0.1,
+        effect: 'sepia'
+    },
+    'marvin': {
+        min: 0,
+        max: 1,
+        step: 0.01,
+        effect: 'invert'
+    },
+    'phobos': {
+        min: 1,
+        max: 30,
+        step: 1,
+        effect: 'blur'
+    },
+    'heat': {
+        min: 1,
+        max: 3,
+        step: 0.1,
+        effect: 'brightness'
+    }
+};
