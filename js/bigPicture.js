@@ -19,6 +19,29 @@ let commentsArr = [];
 let commentsNum = 0;
 
 //Slider
+function reloadSlider() {
+    slider.remove();
+    slider = document.createElement('div');
+    slider.id = 'slider';
+    sliderContainer.appendChild(slider);
+}
+
+function changeEffectDensity() {
+    let currentEffectName = '';
+    Array.from(imgUploadPreview.classList).forEach((className) => {
+        if (className.includes('--')) {
+            currentEffectName = className.slice(className.indexOf('--') + modLength);
+        }
+    });
+    if (currentEffectName) {
+        const currentEffectRange = effectsRanges[currentEffectName];
+        let currentStep = +slider.noUiSlider.get();
+        if (currentEffectName == 'phobos') currentStep += 'px';
+        const filterValue = `filter: ${currentEffectRange.effect}(${currentStep})`;
+        if (filterValue) imgUploadPreview.setAttribute('style', filterValue);
+    }
+}
+
 function createSlider(effectName) {
     if (effectName == 'none') slider.remove();
     else {
@@ -26,7 +49,6 @@ function createSlider(effectName) {
         const effectRange = effectsRanges[effectName];
         noUiSlider.create(slider, {
             start: effectRange.max,
-            tooltips: true,
             range: {
                 'min': effectRange.min,
                 'max': effectRange.max
@@ -35,35 +57,13 @@ function createSlider(effectName) {
             connect: 'upper'
         });
         slider.noUiSlider.on('update', () => {
-            let currentEffectName = '';
-            Array.from(imgUploadPreview.classList).forEach((className) => {
-                if (className.includes('--')) {
-                    currentEffectName = className.slice(className.indexOf('--') + modLength);
-                }
-            })
-            if (currentEffectName) changeEffectDensity(currentEffectName);
+            changeEffectDensity();
         });
     }
 }
 
-function reloadSlider() {
-    slider.remove();
-    slider = document.createElement('div');
-    slider.id = 'slider';
-    sliderContainer.appendChild(slider);
-}
-
-function changeEffectDensity(currentEffectName) {
-    const currentEffectRange = effectsRanges[currentEffectName];
-    let currentStep = +slider.noUiSlider.get();
-    if (currentEffectName == 'phobos') currentStep += 'px';
-    const filterValue = `filter: ${currentEffectRange.effect}(${currentStep})`;
-    if (filterValue) imgUploadPreview.setAttribute('style', filterValue);
-
-}
-
 //Effects
-imgUploadForm.addEventListener('change', (evt) => {
+function applyEffects(evt) {
     if (evt.target.id == 'upload-file') {
         uploadFile(evt)
         createSlider('none');
@@ -82,8 +82,8 @@ imgUploadForm.addEventListener('change', (evt) => {
             createSlider(effectName);
         }
     }
-
-});
+}
+imgUploadForm.addEventListener('change', (evt) => applyEffects(evt));
 
 //Big picture
 export function generateBigPicture(evt) {
@@ -135,7 +135,7 @@ function generateComments(commentsNum) {
 commentsLoader.addEventListener('click', () => generateComments(commentsNum));
 
 //Resize
-imgUploadScale.addEventListener('click', (evt) => {
+function resizeImage(evt) {
     let newValue;
     const currentValue = +scaleControlValue.value.slice(0, -1);
     if (evt.target.className.includes('smaller')) {
@@ -145,4 +145,6 @@ imgUploadScale.addEventListener('click', (evt) => {
     }
     scaleControlValue.value = `${newValue}% `;
     imgUploadPreview.setAttribute('style', `scale:${(newValue / 100)} `);
-});
+}
+
+imgUploadScale.addEventListener('click', (evt) => resizeImage(evt));
