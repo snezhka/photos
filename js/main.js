@@ -1,11 +1,12 @@
 import { generatePictures } from './generatePictures.js';
 import { generateBigPicture } from './bigPicture.js';
 import { validateForm } from './uploadFileForm.js';
-import { Photo } from './photo.js';
 const picturesContainer = document.querySelector('.pictures.container');
 const uploadSubmit = document.querySelector('#upload-submit');
 
-generatePictures(new Array(25).fill(null).map(() => new Photo()));
+fetch('http://localhost:8080/photos').then(data => data.json()).then(photos => {
+    generatePictures(photos)
+}).catch(err => console.log(err.message));
 
 picturesContainer.addEventListener('click', (evt) => generateBigPicture(evt));
 
