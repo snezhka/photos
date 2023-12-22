@@ -15,6 +15,7 @@ const imgUploadScale = document.querySelector('.img-upload__scale');
 const imgUploadForm = document.querySelector('.img-upload__form');
 let slider = document.querySelector('#slider');
 const sliderContainer = document.querySelector('.effect-level__slider');
+const effectLevel = document.querySelector('.effect-level__value');
 let commentsArr = [];
 let commentsNum = 0;
 
@@ -37,8 +38,11 @@ function changeEffectDensity() {
         const currentEffectRange = effectsRanges[currentEffectName];
         let currentStep = +slider.noUiSlider.get();
         if (currentEffectName == 'phobos') currentStep += 'px';
-        const filterValue = `filter: ${currentEffectRange.effect}(${currentStep})`;
-        if (filterValue) imgUploadPreview.setAttribute('style', filterValue);
+        const filterValue = `${currentEffectRange.effect}(${currentStep})`;
+        if (filterValue) {
+            imgUploadPreview.style.filter = filterValue;
+            effectLevel.value = currentStep;
+        }
     }
 }
 
@@ -74,11 +78,11 @@ function applyEffects(evt) {
                 imgUploadPreview.classList.remove(className);
             }
         })
-        const styleAttr = imgUploadPreview.getAttribute('style');
-        if (styleAttr?.includes('filter')) imgUploadPreview.removeAttribute('style');
         const effectName = evt.target.value;
         if (effectName) {
             imgUploadPreview.classList.add(`effects__preview--${effectName}`);
+            // const styleAttr = imgUploadPreview.getAttribute('style');
+            // if (styleAttr?.includes('filter')) imgUploadPreview.setAttribute('style', 'filter: none');
             createSlider(effectName);
         }
     }
@@ -143,8 +147,8 @@ function resizeImage(evt) {
     } else {
         newValue = (currentValue + resizeStep) > resizeMax ? resizeMax : currentValue + resizeStep;
     }
-    scaleControlValue.value = `${newValue}% `;
-    imgUploadPreview.setAttribute('style', `scale:${(newValue / 100)} `);
+    scaleControlValue.value = `${newValue}%`;
+    imgUploadPreview.style.scale = `${(newValue / 100)}`;
 }
 
 imgUploadScale.addEventListener('click', (evt) => resizeImage(evt));
