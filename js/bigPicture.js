@@ -126,7 +126,7 @@ function generateComments(commentsNum) {
     let i = Math.min(5, commentsArr.length);
     let shown = 0;
     while (i != 0) {
-        socialComments.innerHTML += `< li class="social__comment" > <img class="social__picture" src="${commentsArr[0].avatar}" alt="${commentsArr[0].name}" width="35" height="35"> <p class="social__text">${commentsArr[0].message}</p></li>`;
+        socialComments.innerHTML += `<li class="social__comment"> <img class="social__picture" src="${commentsArr[0].avatar}" alt="${commentsArr[0].name}" width="35" height="35"> <p class="social__text">${commentsArr[0].message}</p></li>`;
         commentsShown.innerHTML = ++shown;
         commentsArr.shift();
         i--;
