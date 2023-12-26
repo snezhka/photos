@@ -91,7 +91,7 @@ function validateComments() {
     comment.reportValidity();
 }
 
-buttonSubmit.addEventListener('submit', async function (evt) {
+form.addEventListener('submit', async function (evt) {
     evt.preventDefault();
     validateForm();
     const formData = new FormData(form);
