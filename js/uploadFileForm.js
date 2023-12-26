@@ -6,7 +6,7 @@ const hashTags = document.querySelector('.text__hashtags');
 const comment = document.querySelector('.text__description');
 const imgPreview = document.querySelector('.img-upload__preview img');
 const buttonSubmit = document.querySelector('#upload-submit');
-const form = document.querySelector('#upload-select-image');
+const uploadForm = document.querySelector('#upload-select-image');
 const scaleControlValue = document.querySelector('.scale__control--value');
 const imgUploadPreview = document.querySelector('.img-upload__preview');
 const uploadButton = document.querySelector('#upload-file');
@@ -91,7 +91,7 @@ function validateComments() {
     comment.reportValidity();
 }
 
-form.addEventListener('submit', async function (evt) {
+uploadForm.addEventListener('submit', async function (evt) {
     evt.preventDefault();
     validateForm();
     const formData = new FormData(form);
